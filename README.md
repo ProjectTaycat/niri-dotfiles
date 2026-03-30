@@ -1,2 +1,2 @@
-# fedora-niri-dotfiles
-Taycat Pancake's personal dotfiles centered around the Niri scrolling window manager
+# Taycat's Fedora Niri Notfiles
+Taycat Pancake's (future) dotfiles centered around a Fedora Linux installation and the Niri scrolling window manager
