@@ -1,0 +1,180 @@
+@import "mocha.css";
+
+* {
+    font-family: "Google Sans";
+    font-size: 16px;
+    font-weight: 500;
+    color: @text;
+}
+
+window#waybar {
+    background-color: @crust;
+    border: none;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+
+button {
+    /* Use box-shadow instead of border so the text isn't offset */
+    box-shadow: inset 0 -3px transparent;
+    /* Avoid rounded borders under each button name */
+    border: none;
+    border-radius: 0;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+    background: inherit;
+}
+
+#workspaces button {
+    padding: 0 0.75em;
+    background-color: @mantle;
+    color: @text;
+}
+
+#workspaces button:hover {
+    background: @base;
+}
+
+#workspaces button.focused, #workspace button.active {
+    background-color: @surface0;
+    box-shadow: inset 0 -3px @surface1;
+}
+
+#workspaces button.urgent {
+    background-color: @red;
+}
+
+#window {
+  margin-left: 1em;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#bluetooth,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#scratchpad,
+#mpd {
+    padding: 4px 8px;
+    background-color: @base;
+    margin: 4px 2.5px;
+    border-radius: 2px;
+}
+#power-profiles-daemon,
+#idle_inhibitor {
+  padding: 4px 10px;
+  background-color: @base;
+  margin: 4px 1px;
+  border-radius: 100px;
+
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+#clock {
+  font-family: 'Google Sans Code';
+  color: @text;
+}
+
+#battery {
+    color: @text;
+}
+
+#battery.charging, #battery.plugged {
+    color: @text;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+#battery.critical:not(.charging) {
+    background-color: @red;
+    color: @mantle;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+label:focus {
+    background-color: #000000;
+}
+
+#backlight {
+    color: @text;
+}
+
+#pulseaudio {
+    color: @text;
+}
+
+#tray {
+    border-radius: 2px;
+    margin-right: 2px;
+}
+
+#tray > .passive {
+}
+
+#tray > .needs-attention {
+}
+
+/* Make these things circular */
+#idle_inhibitor,
+#idle_inhibitor.activated,
+#power-profiles-daemon,
+#power-profiles-daemon.performance,
+#power-profiles-daemon.balanced,
+#power-profiles-deamon.power-saver {
+  border-radius: 100px;
+}
+
+#idle_inhibitor {
+    color: @lavender;
+    margin-left: 2px;
+    margin-right: 4px;
+}
+#idle_inhibitor.activated {
+    background-color: @lavender;
+    color: @crust;
+}
+
+#power-profiles-daemon {
+  margin-right: 0.4em;
+}
+#power-profiles-daemon.performance {
+  color: @red;
+}
+#power-profiles-daemon.balanced {
+  color: @blue;
+}
+#power-profiles-daemon.power-saver {
+  color: @green;
+}

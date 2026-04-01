@@ -1,0 +1,77 @@
+{
+  "layer": "top",
+  "position": "top",
+  "spacing": 0,
+
+  // Order of Modules
+  "modules-left": ["niri/workspaces", "niri/window"],
+  "modules-right": ["tray", "pulseaudio", "backlight", "battery", "clock", "idle_inhibitor", "power-profiles-daemon"],
+
+  // Modules Configuration
+  // Left Side Modules
+  "niri/workspaces": {
+    "format": "{value}",
+  },
+  "niri/window": {
+    "format": "{}",
+  },
+
+  // Right Side Modules
+  "tray": {
+    "spacing": 10
+  },
+  "pulseaudio": {
+    "format": "{volume}% {icon} {format_source}",
+    "format-bluetooth": "{volume}% {icon} {format_source}",
+    "format-bluetooth-muted": "MUTED  {icon} {format_source}",
+    "format-muted": "MUTED  {format_source}",
+    "format-source": "{volume}% ",
+    "format-source-muted": "",
+    "on-click": "pavucontrol",
+    "format-icons": {
+      "headphone": "  ",
+      "hands-free": "  ",
+      "headset": "  ",
+      "phone": "  ",
+      "portable": "  ",
+      "car": "  ",
+      "default": ["  ", "  ", "  "]
+    }
+  },
+  "backlight": {
+    "format": "{percent}% {icon}",
+    "format-icons": [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+  },
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{capacity}% {icon}",
+    "format-icons": [" ", " ", " ", " ", " "]
+  },
+  "clock": {
+    "format": "{:%G-%m-%d %H:%M}",
+    "tooltip": true,
+    "tooltip-format": "{calendar}",
+    "timezone": "America/Chicago",
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": ""
+    }
+  },
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+    "tooltip": true,
+    "format-icons": {
+      "default": "",
+      "performance": "",
+      "balanced": "",
+      "power-saver": ""
+    },
+  },
+}

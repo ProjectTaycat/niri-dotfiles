@@ -1,0 +1,21 @@
+sort=-time
+background-color=#1e1e2e
+text-color=#cdd6f4
+border-color=#89b4fa
+border-size=4
+progress-color=over #313244
+font=Google Sans 12
+width=400
+height=800
+padding=10
+default-timeout=10000
+
+[urgency=low]
+border-color=#585b70
+
+[urgency=normal]
+border-color=#fab387
+
+[urgency=critical]
+border-color=#f38ba8
+default-timeout=0

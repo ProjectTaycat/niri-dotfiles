@@ -1,39 +1,137 @@
 {
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
-  "display": {
-    "color": {
-      "title": "blue"
+  "logo": {
+    "padding": {
+      "left": 1,
+      "top": 2
     }
   },
+  "display": {
+    "color": {
+      "os": 2
+    },
+    "separator": "",
+    "key": {
+      "paddingLeft": 2,
+      "width": 13
+    },
+    "constants": [
+      "───────────────────────────"
+    ]
+  },
   "modules": [
-    "title",
-    "separator",
-    "os",
-    "host",
-    "kernel",
-    "uptime",
-    "packages",
-    "shell",
-    // "display",
-    "de",
-    "wm",
-    // "wmtheme",
-    "theme",
-    // "icons",
-    // "font",
-    // "cursor",
-    "terminal",
-    "terminalfont",
-    "cpu",
-    "gpu",
-    "memory",
-    "swap",
-    "disk",
-    // "localip",
-    // "battery",
-    // "poweradapter",
-    // "locale",
+    {
+      "type": "custom",
+      "format": "{$1}{#1} System Information {$1}{#1}",
+      "outputColor": "1"
+    },
+    {
+      "type": "os",
+      "keyColor": "blue"
+    },
+    {
+      "type": "kernel",
+      "keyColor": "blue"
+    },
+    {
+      "type": "packages",
+      "keyColor": "blue"
+    },
+    {
+      "type": "shell",
+      "keyColor": "blue"
+    },
+    {
+      "type": "uptime",
+      "keyColor": "blue"
+    },
+    {
+      "type": "disk",
+      "key": "OS Age",
+      "keyColor": "blue",
+      "format": "{create-time:10} [{days} days]",
+    },
+
+    "break", 
+
+    {
+      "type": "terminal",
+      "keyColor": "cyan"
+    },
+    {
+      "type": "terminalfont",
+      "key": "Term Font",
+      "keyColor": "cyan",
+    },
+    {
+      "type": "de",
+      "keyColor": "cyan"
+    },
+    {
+      "type": "wm",
+      "keyColor": "cyan"
+    },
+    {
+      "type": "wmtheme",
+      "keyColor": "cyan"
+    },
+    {
+      "type": "theme",
+      "keyColor": "cyan"
+    },
+    {
+      "type": "icons",
+      "keyColor": "cyan"
+    },
+    {
+      "type": "font",
+      "keyColor": "cyan"
+    },
+   
     "break",
-    "colors"
+
+    {
+      "type": "host",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "cpu",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "gpu",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "display",
+      "key": "Display",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "disk",
+      "key": "Disk",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "memory",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "swap",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "battery",
+      "key": "Battery",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "custom",
+      "format": "{$1}──────────────────────────────────────────────{#1}",
+    },
+    {
+      "type": "colors",
+      "paddingLeft": 25
+    }
   ]
 }
