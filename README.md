@@ -8,7 +8,9 @@ Git and [GNU Stow](https://www.gnu.org/software/stow/) are used to manage these 
 
 ## Configured applications 
 
-Alongisde niri are all of these other applications that I would consider essential to the experience I have set up, so install these as well.
+Alongisde niri are all of these other applications that I would consider essential to the experience I have set up, so be sure fo install these.
+
+The fonts [Google Sans](https://fonts.google.com/specimen/Google+Sans?query=google+sans) and [Google Sans Code](https://fonts.google.com/specimen/Google+Sans+Code) are used throughout these configuration files. Consider installing them as well
 
 ### Essential to the niri experience
 
