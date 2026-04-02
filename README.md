@@ -17,11 +17,11 @@ The fonts [Google Sans](https://fonts.google.com/specimen/Google+Sans?query=goog
 - `waybar`: Top panel
     - `pavucontrol` for clicking on the "pulseaudio" module
 - `rofi`: Application launcher
-    - `rofimoji` is added onto `rofi`, for searching through and copying emojis
-- `mako`: Receive notifications
+    - `rofimoji` is also installed, for searching through and copying emojis
+- `swaync` or `mako`: Receive notifications
 - `wlogout`: Logout screen
-- `swayidle` and `swaylock`:[^1] Automatically lock the screen after some time
-- `swaybg`:[^1] Set wallpaper
+- `swayidle` and `swaylock`[^1]: Automatically lock the screen after some time
+- `swaybg`[^1]: Set wallpaper
 
 [^1]: These have been configured to display images that have not been included in this repository. Make sure to replace them with your own images.
 

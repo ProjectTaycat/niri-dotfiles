@@ -9,7 +9,7 @@ spawn-sh-at-startup "swayidle -w timeout 120 'swaylock' timeout 300 'niri msg ac
 spawn-sh-at-startup "swaybg -i ~/Pictures/Wallpapers/mocha-tree.png" // Set wallpaper
 spawn-sh-at-startup "udiskie --tray" // Easier mounting of external drives with system tray icon
 spawn-sh-at-startup "nm-applet" // Network Manager Applet, for the system tray
-spawn-sh-at-startup "mako" // Notifications daemon
+spawn-sh-at-startup "swaync" // Notifications daemon
 spawn-sh-at-startup "gammastep" // Adjust color temperature late at night
 spawn-sh-at-startup "ibus start" // I get a notification about this every time because I came from KDE so I just use that
 
@@ -139,6 +139,7 @@ binds {
   Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; } // Terminal
   Mod+W { spawn "firefox"; } // Web Browser
   Mod+E { spawn "dolphin"; } // File Manager
+  Mod+N { spawn-sh "swaync-client -t -sw"; } // Open Notifications
   Super+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
   // Volume Control and Media Keys
   XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ -l 1.0"; }
