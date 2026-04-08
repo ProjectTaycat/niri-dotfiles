@@ -1,52 +1,56 @@
 @import "mocha.css";
 
 * {
-    font-family: "Google Sans";
-    font-size: 16px;
-    font-weight: 500;
-    color: @text;
+  font-size: 16px;
+  font-weight: 500;
+  color: @text;
 }
 
 window#waybar {
-    background-color: @crust;
-    border: none;
+  background-color: @crust;
+  border: none;
 }
 
 window#waybar.hidden {
-    opacity: 0.2;
+  opacity: 0;
 }
 
 
 button {
-    /* Use box-shadow instead of border so the text isn't offset */
-    box-shadow: inset 0 -3px transparent;
-    /* Avoid rounded borders under each button name */
-    border: none;
-    border-radius: 0;
+  /* Use box-shadow instead of border so the text isn't offset */
+  box-shadow: inset 0 -3px transparent;
+  /* Avoid rounded borders under each button name */
+  border: none;
+  border-radius: 0;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 button:hover {
-    background: inherit;
+  background: inherit;
+}
+
+#workspaces, #window {
+  font-family: "Google Sans";
 }
 
 #workspaces button {
-    padding: 0 0.75em;
-    background-color: @mantle;
-    color: @text;
+  padding: 0 0.75em;
+  background-color: @mantle;
+  color: @text;
 }
 
 #workspaces button:hover {
-    background: @base;
+  background: @base;
 }
 
 #workspaces button.focused, #workspace button.active {
-    background-color: @surface0;
-    box-shadow: inset 0 -3px @surface1;
+  background-color: @surface0;
+  box-shadow: inset 0 -3px @surface1;
 }
 
 #workspaces button.urgent {
-    background-color: @red;
+  background-color: @red;
+  color: @crust;
 }
 
 #window {
@@ -65,80 +69,70 @@ button:hover {
 #pulseaudio,
 #wireplumber,
 #custom-media,
-#tray,
 #mode,
 #scratchpad,
 #custom-notification,
 #mpd {
-    padding: 4px 8px;
-    background-color: @base;
-    margin: 4px 2.5px;
-    border-radius: 2px;
-}
-#power-profiles-daemon,
-#idle_inhibitor {
-  padding: 4px 10px;
+  font-family: "GoogleSansCode Nerd Font Propo";
+  padding: 4px 8px;
   background-color: @base;
-  margin: 4px 1px;
-  border-radius: 100px;
-
+  margin: 4px 2.5px;
+  border-radius: 2px; 
 }
 
 /* If workspaces is the leftmost module, omit left margin */
 .modules-left > widget:first-child > #workspaces {
-    margin-left: 0;
+  margin-left: 0;
 }
 
 /* If workspaces is the rightmost module, omit right margin */
 .modules-right > widget:last-child > #workspaces {
-    margin-right: 0;
+  margin-right: 0;
 }
 
 #clock {
-  font-family: 'Google Sans Code';
-  color: @text;
+  color: @blue;
 }
 
 #battery {
-    color: @text;
+  color: @text;
 }
 
 #battery.charging, #battery.plugged {
-    color: @text;
+  color: @green;
 }
 
 @keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: #000000;
-    }
+  to {
+    background-color: #ffffff;
+    color: #000000;
+  }
 }
 
 #battery.critical:not(.charging) {
-    background-color: @red;
-    color: @mantle;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+  background-color: @red;
+  color: @crust;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 label:focus {
-    background-color: #000000;
+  background-color: #000000;
 }
 
 #backlight {
-    color: @text;
+  color: @red;
 }
 
 #pulseaudio {
-    color: @text;
+  color: @mauve;
 }
 
 #tray {
-    border-radius: 2px;
-    margin-right: 2px;
+  margin-right: 6px;
 }
 
 #tray > .passive {
@@ -147,28 +141,28 @@ label:focus {
 #tray > .needs-attention {
 }
 
-/* Make these things circular */
-#idle_inhibitor,
-#idle_inhibitor.activated,
 #power-profiles-daemon,
-#power-profiles-daemon.performance,
-#power-profiles-daemon.balanced,
-#power-profiles-deamon.power-saver {
+#idle_inhibitor {
+  font-family: "GoogleSansCode Nerd Font Mono";
+  font-size: 125%;
+  padding: 0 8px;
+  background-color: @base;
+  margin: 4px 1px;
   border-radius: 100px;
 }
-
 #idle_inhibitor {
-    color: @lavender;
-    margin-left: 2px;
-    margin-right: 4px;
+  color: @lavender;
+  font-size: 150%;
+  margin-left: 2px;
+  margin-right: 4px;
 }
 #idle_inhibitor.activated {
-    background-color: @lavender;
-    color: @crust;
+  background-color: @lavender;
+  color: @crust;
 }
 
 #power-profiles-daemon {
-  margin-right: 0.4em;
+  margin-right: 0.2em;
 }
 #power-profiles-daemon.performance {
   color: @red;

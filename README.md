@@ -10,15 +10,18 @@ Git and [GNU Stow](https://www.gnu.org/software/stow/) are used to manage these 
 
 Alongisde niri are all of these other applications that I would consider essential to the experience I have set up, so be sure fo install these.
 
-The fonts [Google Sans](https://fonts.google.com/specimen/Google+Sans?query=google+sans) and [Google Sans Code](https://fonts.google.com/specimen/Google+Sans+Code) are used throughout these configuration files. Consider installing them as well
+The fonts [Google Sans](https://fonts.google.com/specimen/Google+Sans?query=google+sans) and [Google Sans Code](https://fonts.google.com/specimen/Google+Sans+Code) are used throughout these configuration files. Consider installing them as well. In the case of Google Sans Code, I actually took the time to patch them with the [Nerd Font](https://github.com/ryanoasis/nerd-fonts?tab=readme-ov-file#option-10-patch-your-own-font) icons (Propo for waybar and Mono for everything else) and I would recommend that for a nicer-looking Waybar.
 
 ### Essential to the niri experience
 
 - `waybar`: Top panel
     - `pavucontrol` for clicking on the "pulseaudio" module
 - `rofi`: Application launcher
-    - `rofimoji` is also installed, for searching through and copying emojis
-- `swaync` or `mako`: Receive notifications
+    - `rofimoji` for searching through and copying emojis
+    - `rofi-calc` for doing calculations (built from source on my Fedora install)
+    - When Fedora 44 releases, `cliphist` will be added to for looking through clipboard history
+- `SwayNotificationCenter` or `mako`: Receive notifications
+- `swayosd`: On-screen display for actions like toggling caps lock and changing volume
 - `wlogout`: Logout screen
 - `swayidle` and `swaylock`[^1]: Automatically lock the screen after some time
 - `swaybg`[^1]: Set wallpaper
@@ -40,8 +43,13 @@ The fonts [Google Sans](https://fonts.google.com/specimen/Google+Sans?query=goog
 ### Miscellaneous
 
 - `neovim`: text editor
-- `qt6ct`: Theming of Qt applications with the Catppuccin Mocha color scheme
+- `fastfetch`: The cool system information showcase!
+- `qt5ct` and `qt6ct`: Theming of Qt applications with the Catppuccin Mocha color scheme
 
 ## Caveats
 
-My installation of niri is built upon an installation of Fedora KDE Plasma Desktop 43. This has led to some aspects of KDE being left over while setting up niri. In my experience, this has mainly affected the default applications for certain file types as well as the themes of Qt and GTK applications. I cannot guarantee that the theming of Qt and GTK apps will work the same on other environments, but I have done what I can to consider them, namely with the inclusion of the `qt6ct` configuration. GTK theming, however, I still need to figure out
+My installation of niri is built upon an installation of Fedora KDE Plasma Desktop 43. This has led to some aspects of KDE being left over while setting up niri. In my experience, this has mainly affected the default applications for certain file types (you can figure those out on your own) as well as the themes of Qt and GTK applications. I cannot guarantee that the theming of Qt and GTK apps will work the same on other environments, but I have done what I can to consider them, namely with the inclusion of the `qt5ct` and `qt6ct` configuration files. GTK theming, however, I have decided to leave alone and live with what I have
+
+## NOTE TO SELF
+
+Hi Taycat from another universe. If you ever decide to change the border width and gaps of the windows on niri, don't forget to also change them in `swaync` and `rofi` configs!!!

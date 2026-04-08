@@ -6,7 +6,7 @@
 * {
   background:                  @base;
   foreground:                  @text;
-  lightbg:                     @mantle;
+  lightbg:                     @base;
   lightfg:                     @text;
   selected-active-foreground:  @background;
   separatorcolor:              @foreground;
@@ -33,7 +33,7 @@
 }
 
 element {
-  padding: 8px ;
+  padding: 12;
   cursor:  pointer;
   spacing: 5px ;
   border:  0;
@@ -87,27 +87,27 @@ element-icon {
   text-color:       inherit;
 }
 window {
-  padding: 5;
-  width: 28em;
+  padding: 4;
+  width: 22em;
   background-image: linear-gradient(45deg, #89dceb, #89b4fa, #cba6f7);
 }
 mainbox {
   background-color: @background;
-  padding: 5;
+  padding: 0;
   border:  0;
 }
 message {
-  padding:      1px ;
-  border-color: @surface1;
-  border:       3px solid 0px 0px ;
+  padding:      0;
+  border-color: @surface0;
+  border:       2px solid 0px 0px ;
 }
 textbox {
   text-color: @foreground;
-  background-color: @background;
-  padding: 2px;
+  background-color: @mantle;
+  padding: 12;
 }
 listview {
-  padding:      2px 0px 0px ;
+  padding:      0;
   scrollbar:    true;
   border-color: @separatorcolor;
   spacing:      2px ;
@@ -115,12 +115,12 @@ listview {
   fixed-height: 0;
 }
 scrollbar {
-  width:        10px ;
+  width:        8px ;
   padding:      0;
-  handle-width: 10px ;
+  handle-width: 8px ;
   border:       0;
   background-color: @crust;
-  handle-color: @normal-foreground;
+  handle-color: @surface0;
 }
 sidebar {
   border-color: @separatorcolor;
@@ -138,22 +138,23 @@ button selected {
 num-filtered-rows {
   expand:     false;
   text-color: @text;
-  font: "Google Sans Bold 12";
+  font: "Google Sans Bold 11";
 }
 num-rows {
   expand:     false;
   text-color: @text;
-  font: "Google Sans Bold 12";
+  font: "Google Sans Bold 11";
 }
 textbox-num-sep {
   expand:     false;
   str:        "/";
   text-color: @text;
-  font: "Google Sans Bold 12";
+  font: "Google Sans Bold 11";
 }
 inputbar {
-  padding:    6px ;
+  padding:    12;
   spacing:    0px ;
+  background-color: @mantle;
   text-color: @normal-foreground;
   children:   [ "prompt","textbox-prompt-colon","entry","num-filtered-rows","textbox-num-sep","num-rows","case-indicator" ];
 }

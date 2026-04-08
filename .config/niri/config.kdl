@@ -5,13 +5,13 @@
 
 // AUTOSTART //
 spawn-sh-at-startup "waybar" // Add top panel (Waybar)
-spawn-sh-at-startup "swayidle -w timeout 120 'swaylock' timeout 300 'niri msg action power-off-monitors'"
-spawn-sh-at-startup "swaybg -i ~/Pictures/Wallpapers/mocha-tree.png" // Set wallpaper
-spawn-sh-at-startup "udiskie --tray" // Easier mounting of external drives with system tray icon
 spawn-sh-at-startup "nm-applet" // Network Manager Applet, for the system tray
+spawn-sh-at-startup "udiskie --tray" // Easier mounting of external drives with system tray icon
+spawn-sh-at-startup "swayidle -w timeout 120 'swaylock' timeout 300 'niri msg action power-off-monitors'" // Automatic Screen locking
+spawn-sh-at-startup "swaybg -i ~/Pictures/Wallpapers/mocha-tree.png" // Set wallpaper
 spawn-sh-at-startup "swaync" // Notifications daemon
+spawn-sh-at-startup "swayosd-server" // On-screen display for volume change, caps/num lock toggle, etc.
 spawn-sh-at-startup "gammastep" // Adjust color temperature late at night
-spawn-sh-at-startup "ibus start" // I get a notification about this every time because I came from KDE so I just use that
 
 // ENVIRONMENT VARIABLES
 environment {
@@ -31,7 +31,7 @@ input {
     natural-scroll
   }
   warp-mouse-to-focus // Mouse moves to center of newly focused windows
-  focus-follows-mouse max-scroll-amount="40%" // Focus automatically when hovering on windows at least 40% off-screen
+  focus-follows-mouse max-scroll-amount="70%" // Focus automatically when hovering on windows at least 40% off-screen
 }
 
 // DISPLAY OUTPUTS //
@@ -56,7 +56,7 @@ output "DP-1" { // Gaming Monitor
 // WINDOW LAYOUTS //
 // Wiki page: https://yalter.github.io/niri/Configuration:-Layout
 layout {
-  gaps 10
+  gaps 6
   center-focused-column "never"
   always-center-single-column
   preset-column-widths { // Preset column widths, set with Mod + R
@@ -69,8 +69,8 @@ layout {
     off
   }
   border {
-    width 5
-    active-gradient from="#89dceb" to="#89b4fa" to="#cba6f7" angle=135
+    width 4
+    active-gradient from="#89dceb" to="#cba6f7" angle=135
     inactive-color "#313244"
     urgent-color "#f38ba8"
   }
@@ -84,6 +84,7 @@ layout {
 // All windows
 window-rule {
   draw-border-with-background false
+  clip-to-geometry true
 }
 // Spawn messaging platforms on laptop screen
 window-rule {
@@ -109,7 +110,7 @@ window-rule {
   match app-id="nm-connection-editor"
   match app-id="org.pulseaudio.pavucontrol"
   open-floating true
-  default-floating-position x=8 y=8 relative-to="top-right"
+  default-floating-position x=6 y=6 relative-to="top-right"
 }
 // Make kitty/Alacritty terminal slightly transparent and open a little wider than normal
 window-rule {
@@ -121,12 +122,19 @@ window-rule {
 // Make file manager spawn larger
 window-rule {
   match app-id="org.kde.dolphin"
-  default-column-width { fixed 1550; }
+  default-column-width { fixed 1500; }
 }
-// Make all of these apps float
+// Make all of these other apps float
 window-rule {
   match app-id="org.kde.kcalc"
+  match app-id="steam" title="Friends List"
+  match app-id="XEyes"
   open-floating true
+}
+// But don't focus on them immediately
+window-rule {
+  match is-floating=true
+  open-focused false
 }
 
 // KEYBINDS //
@@ -134,22 +142,24 @@ window-rule {
 binds {
   // Show list of important hotkeys
   Mod+Shift+Slash { show-hotkey-overlay; }
-  // Applications 
+  // Open apps 
   Mod+Space hotkey-overlay-title="Run an Application: Rofi" { spawn-sh "rofi -show drun"; }// Application Launcher
   Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; } // Terminal
   Mod+W { spawn "firefox"; } // Web Browser
   Mod+E { spawn "dolphin"; } // File Manager
+  Ctrl+Alt+Escape { spawn-sh "flatpak run io.missioncenter.MissionCenter"; } // Mission Center
+  // System functions
   Mod+N { spawn-sh "swaync-client -t -sw"; } // Open Notifications
   Super+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
   // Volume Control and Media Keys
-  XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ -l 1.0"; }
-  XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-"; }
-  XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
-  XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
-  XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
-  XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop"; }
-  XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
-  XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
+  XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "swayosd-client --output-volume raise"; }
+  XF86AudioLowerVolume allow-when-locked=true { spawn-sh "swayosd-client --output-volume lower"; }
+  XF86AudioMute        allow-when-locked=true { spawn-sh "swayosd-client --output-volume mute-toggle"; }
+  XF86AudioMicMute     allow-when-locked=true { spawn-sh "swayosd-client --input-volume mute-toggle"; }
+  XF86AudioPlay        allow-when-locked=true { spawn-sh "swayosd-client --playerctl play-pause"; }
+  XF86AudioStop        allow-when-locked=true { spawn-sh "swayosd-client --playerctl stop"; }
+  XF86AudioPrev        allow-when-locked=true { spawn-sh "swayosd-client --playerctl prev"; }
+  XF86AudioNext        allow-when-locked=true { spawn-sh "swayosd-client --playerctl next"; }
   // Brightness Control
   XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
   XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
@@ -205,8 +215,6 @@ binds {
   // Move positions of entire workspaces
   Mod+Shift+Page_Down { move-workspace-down; }
   Mod+Shift+Page_Up   { move-workspace-up; }
-  Mod+Shift+U         { move-workspace-down; }
-  Mod+Shift+I         { move-workspace-up; }
   // Focus and moving columns with your scrollwheel!
   Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
   Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
@@ -275,7 +283,6 @@ binds {
   Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
   // Quit Niri session
   Mod+Shift+E { spawn-sh "wlogout -b 2"; }
-  Ctrl+Alt+Delete { spawn-sh "wlogout -b 2"; }
   // Powers off the monitors. To turn them back on, do any input like
   // moving the mouse or pressing any other key.
   Mod+Shift+P { power-off-monitors; }

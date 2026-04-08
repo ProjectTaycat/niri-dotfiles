@@ -4,18 +4,18 @@ general.import = [
 
 [font]
 size = 14.0
-[font.normal]
-family = "Google Sans Code"
-style = "Medium"
-[font.italic]
-family = "Google Sans Code"
-style = "Medium Italic"
-[font.bold]
-family = "Google Sans Code"
-style = "Bold"
-[font.bold_italic]
-family = "Google Sans Code"
-style = "Bold Italic"
+  [font.normal]
+  family = "GoogleSansCode Nerd Font Mono"
+  style = "Medium"
+  [font.italic]
+  family = "GoogleSansCode Nerd Font Mono"
+  style = "Medium Italic"
+  [font.bold]
+  family = "GoogleSansCode Nerd Font Mono"
+  style = "Bold"
+  [font.bold_italic]
+  family = "GoogleSansCode Nerd Font Mono"
+  style = "Bold Italic"
 
 [env]
 TERM = "xterm-256color"

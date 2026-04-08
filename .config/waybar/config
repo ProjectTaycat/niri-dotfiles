@@ -18,50 +18,70 @@
 
   // Right Side Modules
   "tray": {
-    "spacing": 10
+    "spacing": 10,
   },
   "pulseaudio": {
-    "format": "{volume}% {icon} {format_source}",
-    "format-bluetooth": "{volume}% {icon} {format_source}",
-    "format-bluetooth-muted": "MUTED  {icon} {format_source}",
-    "format-muted": "MUTED  {format_source}",
-    "format-source": "{volume}% ",
-    "format-source-muted": "",
+    "format": "{icon} {volume}% {format_source}",
+    "format-muted": "{icon} MUTED {format_source}",
+    "format-bluetooth": "{icon} {volume}% {format_source}",
+    "format-bluetooth-muted": " {icon} MUTED {format_source}",
+    "format-source": " {volume}%",
+    "format-source-muted": " MUTED",
     "on-click": "pavucontrol",
     "format-icons": {
-      "headphone": "  ",
-      "hands-free": "  ",
-      "headset": "  ",
-      "phone": "  ",
-      "portable": "  ",
-      "car": "  ",
-      "default": ["  ", "  ", "  "]
+      "headphone": "󰋋",
+      "headphone-muted": "󰟎",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""],
+      "default-muted": "",
     }
   },
   "backlight": {
-    "format": "{percent}% {icon}",
-    "format-icons": [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    "format": "{icon} {percent}%",
+    "format-icons": ["", "", "", "", "", "", "", "", ""],
+    "tooltip-format": "Brightness: {percent}%",
   },
   "battery": {
     "states": {
       "warning": 30,
-      "critical": 15
+      "critical": 15,
     },
-    "format": "{capacity}% {icon}",
-    "format-icons": [" ", " ", " ", " ", " "]
+    "format": "{icon} {capacity}%",
+    "format-icons": ["", "", "", "", ""],
+    "tooltip-format": "Battery: {capacity}%\n{timeTo}",
   },
   "clock": {
-    "format": "{:%G-%m-%d %H:%M}",
+    "format": " {:%G-%m-%d %H:%M}",
     "tooltip": true,
-    "tooltip-format": "{calendar}",
     "timezone": "America/Chicago",
+    "tooltip-format": "<span font='GoogleSansCode Nerd Font Mono Medium'>{calendar}</span>",
+    "calendar": {
+      "on-scroll": 1,
+      "mode-mon-col": 3,
+      "format": {
+        "months": "<b>{}</b>",
+        "weekdays": "<span color='#89b4fa'><b>{}</b></span>",
+        "today": "<span color='#cba6f7'><b>{}</b></span>",
+      }
+    },
+    "actions": {
+      "on-click": "mode",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down",
+    }
   },
   "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
       "activated": "",
-      "deactivated": ""
-    }
+      "deactivated": "",
+    },
+    "tooltip-format-activated": "Idle inhibitor: {status}",
+    "tooltip-format-deactivated": "Idle inhibitor: {status}",
   },
   "power-profiles-daemon": {
     "format": "{icon}",
@@ -71,7 +91,7 @@
       "default": "",
       "performance": "",
       "balanced": "",
-      "power-saver": ""
+      "power-saver": "",
     },
   },
   "custom/notification": {
@@ -85,7 +105,7 @@
       "inhibited-notification": "󰂛",
       "inhibited-none": "󰪑",
       "dnd-inhibited-notification": "󰂛",
-      "dnd-inhibited-none": "󰪑"
+      "dnd-inhibited-none": "󰪑",
     },
     "return-type": "json",
     "exec-if": "which swaync-client",

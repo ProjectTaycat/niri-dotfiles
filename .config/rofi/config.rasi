@@ -1,8 +1,8 @@
 @theme "catppuccin-default"
 
 configuration {
-	modes: "drun,window,emoji:rofimoji,run,filebrowser";
-	font: "Google Sans Medium 12";
+	modes: "drun,calc,emoji:rofimoji,run,window,filebrowser";
+	font: "Google Sans Medium 13";
 /*	location: 0;*/
 /*	yoffset: 0;*/
 /*	xoffset: 0;*/
@@ -78,6 +78,7 @@ configuration {
 /*	display-keys: ;*/
 	display-filebrowser: "Browse files" ;
   display-emoji: "Emoji";
+  display-calc: "Calculate";
 /*	display-recursivebrowser: ;*/
 /*	kb-primary-paste: "Control+V,Shift+Insert";*/
 /*	kb-secondary-paste: "Control+v,Insert";*/
