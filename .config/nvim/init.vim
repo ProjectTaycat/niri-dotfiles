@@ -4,7 +4,6 @@
 
 " Vim-plug - Plugin Manager
 call plug#begin('~/.config/nvim/plugins')
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'itchyny/vim-gitbranch'
 call plug#end()
 
@@ -45,7 +44,7 @@ let g:currentmode={
     \ 'S'      : 'S·LINE',
     \ '\<C-S>' : 'S·BLOCK',
     \ 'i'      : 'INSERT',
-    \ 'R'      : 'R',
+    \ 'R'      : 'REPLACE',
     \ 'Rv'     : 'V·REPLACE',
     \ 'c'      : 'COMMAND',
     \ 'cv'     : 'VIM EX',
@@ -57,21 +56,17 @@ let g:currentmode={
     \ 't'      : 'TERMINAL'
     \}
 
-function! GitInfo()
-endfunction
-
 set laststatus=2 " Show status bar on 2nd to last line
 
 " Left side
 set statusline=
 set statusline+=%#CurrentMode#
-set statusline+=\ \ %{g:currentmode[mode()]}\ 
+set statusline+=\ %{g:currentmode[mode()]}\ 
 set statusline+=%#GitBranch# 
 set statusline+=\ %{gitbranch#name()}
-set statusline+=%#FilePath# 
+set statusline+=%#EverythingElse# 
 set statusline+=\ %F\ 
-set statusline+=%#EverythingElse#
-set statusline+=\ %m\ 
+set statusline+=%m\ 
 set statusline+=\ 
 
 " Separator
@@ -80,13 +75,14 @@ set statusline+=%=
 " Right side
 set statusline+=\ %R\ %Y\ 
 set statusline+=[%{(&fenc!=''?&fenc:&enc)}\,%{&ff}]\ 
-set statusline+=%#FilePosition#
+set statusline+=%#FilePercent#
 set statusline+=\ %p%%\ 
-set statusline+=-\ 
-set statusline+=%l:%c\ \ 
+set statusline+=%#FilePosition# 
+set statusline+=\ %l:%c\ 
 
 hi CurrentMode guifg=#1e1e2e guibg=#89b4fa gui=BOLD
-hi GitBranch guifg=#f5c2e6 guibg=#313244 gui=BOLD
-hi FilePath guibg=#313244
+hi GitBranch guifg=#f5c2e6 guibg=#11111b gui=BOLD
 hi EverythingElse guifg=#cdd6f4 guibg=#11111b
-hi FilePosition guifg=#1e1e2e guibg=#89b4fa gui=BOLD
+hi FilePercent guifg=#89b4fa guibg=#313244
+hi FilePosition guifg=#1e1e2e guibg=#89b4fa
+

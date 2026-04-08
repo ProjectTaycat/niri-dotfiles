@@ -1,7 +1,7 @@
 // This config is in the KDL format: https://kdl.dev
 // "/-" comments out the following node.
 // Check the wiki for a full description of the configuration:
-// https://yalter.github.io/niri/Configuration:-Introduction
+// https://niri-wm.github.io/niri/Configuration:-Introduction
 
 // AUTOSTART //
 spawn-sh-at-startup "waybar" // Add top panel (Waybar)
@@ -36,7 +36,7 @@ input {
 
 // DISPLAY OUTPUTS //
 // Run `niri msg outputs` while inside a niri instance to list displays.
-// Docs page: https://yalter.github.io/niri/Configuration:-Outputs
+// Docs page: https://niri-wm.github.io/niri/Configuration:-Outputs
 // Laptop Screen
 output "eDP-1" {
   mode "1920x1080@144.001"
@@ -54,7 +54,7 @@ output "DP-1" { // Gaming Monitor
 }
 
 // WINDOW LAYOUTS //
-// Wiki page: https://yalter.github.io/niri/Configuration:-Layout
+// Wiki page: https://niri-wm.github.io/niri/Configuration:-Layout.html
 layout {
   gaps 6
   center-focused-column "never"
@@ -63,6 +63,13 @@ layout {
     proportion 0.33333
     proportion 0.5
     proportion 0.66667
+    proportion 1.0
+  }
+  preset-window-heights { // Preset window heights, set with Mod + Shift + R
+    proportion 0.33333
+    proportion 0.5
+    proportion 0.66667
+    proportion 1.0
   }
   default-column-width { proportion 0.60; }
   focus-ring { // Use borders instead of focus rings
@@ -70,23 +77,37 @@ layout {
   }
   border {
     width 4
-    active-gradient from="#89dceb" to="#cba6f7" angle=135
+    active-gradient from="#89dceb" to="#cba6f7" angle=135 in="oklch shorter hue"
     inactive-color "#313244"
     urgent-color "#f38ba8"
   }
   shadow {
     off
   }
+  tab-indicator {
+    place-within-column
+    length total-proportion=0.5
+    width 6
+    gap 5
+    gaps-between-tabs 4
+    corner-radius 6
+    active-color "#a6e3a1"
+    inactive-color "#313244"
+    urgent-color "#f38ba8"
+  }
+  insert-hint {
+    color "#89b4fa99"
+  }
 }
 
 // WINDOW RULES //
-// Wiki page: https://yalter.github.io/niri/Configuration:-Window-Rules
-// All windows
+// Wiki page: https://niri-wm.github.io/niri/Configuration:-Window-Rules
+// Rules for all windows
 window-rule {
   draw-border-with-background false
   clip-to-geometry true
 }
-// Spawn messaging platforms on laptop screen
+// Spawn messaging platforms on laptop screen, and a bit larger than usual
 window-rule {
   match app-id="vesktop"
   match app-id="app.fluxer.Fluxer"
@@ -98,31 +119,42 @@ window-rule {
   match app-id=r#"firefox$"# title="^Picture-in-Picture$"
   open-floating true
 }
-// Block out Password Managers from screencasting
+// Block out all of these apps from being screencast
 window-rule {
+  // Password managers
   match app-id=r#"^org\.keepassxc\.KeePassXC$"#
   match app-id=r#"^org\.gnome\.World\.Secrets$"#
-  block-out-from "screencast" // Block out from screencasting but still allow with screenshots
+  // Messaging apps
+  match app-id="app.fluxer.Fluxer"
+  match app-id="vesktop"
+  block-out-from "screencast" // Block out from screencasting but still show in screenshots
 }
-// Make waybar utilites spawn floating in the top right
+// Make waybar utilites spawn floating in the top right, but don't focus on them immediately
 window-rule {
   match app-id="blueman-manager"
   match app-id="nm-connection-editor"
   match app-id="org.pulseaudio.pavucontrol"
   open-floating true
+  open-focused false
   default-floating-position x=6 y=6 relative-to="top-right"
 }
-// Make kitty/Alacritty terminal slightly transparent and open a little wider than normal
+// Make kitty/Alacritty terminal slightly transparent and open a little larger
 window-rule {
   match app-id="Alacritty"
   match app-id="kitty"
   opacity 0.90
   default-column-width { fixed 1420; }
 }
-// Make file manager spawn larger
+// Make these windows spawn larger
 window-rule {
   match app-id="org.kde.dolphin"
+  match app-id="org.qbittorrent.qBittorrent"
   default-column-width { fixed 1500; }
+}
+// Make VSCodium spawn maximized
+window-rule {
+  match app-id="codium"
+  open-maximized true
 }
 // Make all of these other apps float
 window-rule {
@@ -131,10 +163,13 @@ window-rule {
   match app-id="XEyes"
   open-floating true
 }
-// But don't focus on them immediately
-window-rule {
-  match is-floating=true
-  open-focused false
+
+// LAYER RULES //
+// Wiki page: https://niri-wm.github.io/niri/Configuration%3A-Layer-Rules.html
+// Block swaync notifications from being screencast
+layer-rule {
+  match namespace="swaync-notification-window"
+  block-out-from "screencast"
 }
 
 // KEYBINDS //
@@ -220,7 +255,7 @@ binds {
   Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
   Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
   Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
-  // horizontal scrolling; these binds replicate that.
+  // Horizontal scrolling; these binds replicate that.
   Mod+Shift+WheelScrollDown      { focus-column-right; }
   Mod+Shift+WheelScrollUp        { focus-column-left; }
   Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
@@ -253,18 +288,19 @@ binds {
   Mod+Comma  { consume-window-into-column; }
   // Expel the bottom window from the focused column to the right.
   Mod+Period { expel-window-from-column; }
+  // Switch to preset window heights
+  Mod+R { switch-preset-column-width; }
+  Mod+Shift+R { switch-preset-window-height; }
   // Maximize columns
   Mod+F { maximize-column; }
-  Mod+Shift+F { fullscreen-window; }
-  // Expand the focused column to space not taken up by other fully visible columns.
-  // Makes the column "fill the rest of the space".
-  Mod+Ctrl+F { expand-column-to-available-width; }
+  Mod+Shift+F { maximize-window-to-edges; }
+  Mod+Ctrl+F { fullscreen-window; }
   // Column centering
   Mod+C { center-column; }
   Mod+Ctrl+C { center-visible-columns; }
   // Fine window width and height adjustment
-  Mod+Minus { set-column-width "-8%"; }
-  Mod+Equal { set-column-width "+8%"; }
+  Mod+Minus { set-column-width "-10%"; }
+  Mod+Equal { set-column-width "+10%"; }
   Mod+Shift+Minus { set-window-height "-10%"; }
   Mod+Shift+Equal { set-window-height "+10%"; }
   // Move the focused window between the floating and the tiling layout.
@@ -281,7 +317,7 @@ binds {
   // The allow-inhibiting=false property can be applied to other binds as well,
   // which ensures niri always processes them, even when an inhibitor is active.
   Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
-  // Quit Niri session
+  // Logout screen
   Mod+Shift+E { spawn-sh "wlogout -b 2"; }
   // Powers off the monitors. To turn them back on, do any input like
   // moving the mouse or pressing any other key.

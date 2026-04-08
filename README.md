@@ -52,4 +52,4 @@ My installation of niri is built upon an installation of Fedora KDE Plasma Deskt
 
 ## NOTE TO SELF
 
-Hi Taycat from another universe. If you ever decide to change the border width and gaps of the windows on niri, don't forget to also change them in `swaync` and `rofi` configs!!!
+Hi Taycat from another universe. If you ever decide to change the border width and gaps of the windows on niri, don't forget to also change them lower down in the `niri` config file as well as in the `swaync` and `rofi` configs!!!
