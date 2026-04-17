@@ -58,6 +58,7 @@
     "format": " {:%G-%m-%d %H:%M}",
     "tooltip": true,
     "timezone": "America/Chicago",
+    "locale": "en_DK.UTF-8",
     "tooltip-format": "<span font='GoogleSansCode Nerd Font Mono Medium'>{calendar}</span>",
     "calendar": {
       "on-scroll": 1,

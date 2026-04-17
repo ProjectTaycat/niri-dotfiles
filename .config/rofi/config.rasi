@@ -1,7 +1,7 @@
 @theme "catppuccin-default"
 
 configuration {
-	modes: "drun,calc,emoji:rofimoji,run,window,filebrowser";
+	modes: "drun,calc,emoji:rofimoji,run";
 	font: "Google Sans Medium 13";
 /*	location: 0;*/
 /*	yoffset: 0;*/

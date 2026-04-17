@@ -26,3 +26,4 @@ alias vim='nvim'
 eval "$(starship init bash)"
 
 alias diditwork='echo "Yes it did!"'
+export PATH=/home/projecttaycat/.local/bin:$PATH

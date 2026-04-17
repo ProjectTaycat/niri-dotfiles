@@ -39,7 +39,7 @@ let g:currentmode={
     \ 'no'     : 'N·OPERATOR PENDING',
     \ 'v'      : 'VISUAL',
     \ 'V'      : 'VLINE',
-    \ '\<C-V>' : 'V·BLOCK',
+    \ '<C-V>'    : 'V·BLOCK',
     \ 's'      : 'SELECT',
     \ 'S'      : 'S·LINE',
     \ '\<C-S>' : 'S·BLOCK',
